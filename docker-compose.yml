@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+
+  server:
+    image: server
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000:3000
+    depends_on: 
+      - db
+    volumes:
+      - ./server/src:/app/src
+      
+  client:
+      image: client
+      build:
+        context: ./client
+        dockerfile: ./Dockerfile
+      ports:
+          - 8000:80
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: administrator
+      POSTGRES_PASSWORD: admin_example
+      POSTGRES_DB: jobs
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
