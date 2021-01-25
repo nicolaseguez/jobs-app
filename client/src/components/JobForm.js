@@ -41,10 +41,12 @@ export const JobForm = ({onSubmit}) => {
 
   const handleClick = () => {
     setSubmitted(true);
-    if (form.location && form.description) {
+    if (form.location || form.description) {
       onSubmit(form);
     }
   }
+
+  const invalid = !form.location && !form.description; 
 
   return (
     <div>
@@ -53,10 +55,11 @@ export const JobForm = ({onSubmit}) => {
         <FormControl required fullWidth>
           <InputLabel id="location">Location</InputLabel>
           <Select labelId="location" value={form.location} onChange={handleChange('location')}>
+              <MenuItem value="">Select a Location</MenuItem>
             {locations.map(location => 
               <MenuItem key={location} value={location.toLowerCase()}>{location}</MenuItem>)}
           </Select>
-          <FormHelperText error={submitted} className={!form.location ? classes.root : ''}>
+          <FormHelperText error={submitted} className={invalid? classes.root : ''}>
             Please, select a location.
           </FormHelperText>
         </FormControl>
@@ -64,10 +67,11 @@ export const JobForm = ({onSubmit}) => {
         <FormControl required fullWidth>
           <InputLabel id="description">Description</InputLabel>
           <Select labelId="description" value={form.description} onChange={handleChange('description')}>
+            <MenuItem value="">Select a Description</MenuItem>
             {descriptions.map(description => 
               <MenuItem key={descriptions} value={description.toLowerCase()}>{description}</MenuItem>)}
           </Select>
-          <FormHelperText error={submitted} className={!form.description ? classes.root : ''}>
+          <FormHelperText error={submitted} className={invalid ? classes.root : ''}>
             Please, select a description.
           </FormHelperText>
         </FormControl>

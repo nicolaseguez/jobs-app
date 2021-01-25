@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', async (req: Request, res: Response) => {
   const {description, location} = req.query;
 
-  if (!description || !location) {
+  if (!description && !location) {
     return res.status(400).send({msg: 'bad request'});
   }
 
