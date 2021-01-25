@@ -1,5 +1,5 @@
 import React from 'react';
-import {List, CircularProgress, Divider} from '@material-ui/core';
+import {List, CircularProgress} from '@material-ui/core';
 
 import { JobItem } from './JobItem';
 
@@ -19,12 +19,7 @@ export const JobList = ({jobs, loading, onViewMore, msg}) => {
   if (!loading && jobs.length > 0){
     node = <List>
       {
-        jobs.map(job => (
-          <>
-            <JobItem key={job.id} job={job} onViewMore={onViewMore} />
-            <Divider />
-          </>
-        ))
+        jobs.map(job => <JobItem key={job.id} job={job} onViewMore={onViewMore} />)
       }
     </List>
   }

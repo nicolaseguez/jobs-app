@@ -69,7 +69,7 @@ export const JobForm = ({onSubmit}) => {
           <Select labelId="description" value={form.description} onChange={handleChange('description')}>
             <MenuItem value="">Select a Description</MenuItem>
             {descriptions.map(description => 
-              <MenuItem key={descriptions} value={description.toLowerCase()}>{description}</MenuItem>)}
+              <MenuItem key={description} value={description.toLowerCase()}>{description}</MenuItem>)}
           </Select>
           <FormHelperText error={submitted} className={invalid ? classes.root : ''}>
             Please, select a description.
